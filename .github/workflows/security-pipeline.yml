@@ -1,9 +1,9 @@
-﻿# DevSecOps Security Pipeline — IE3142 Group Assignment
+﻿# DevSecOps Security Pipeline - IE3142 Group Assignment
 # Runs 4 security gates on every push/PR to main:
-#   1. SAST (Semgrep) — static code analysis for vulnerability patterns
-#   2. Dependency Scan (npm audit) — known CVEs in third-party packages
-#   3. Secrets Scan (Gitleaks) — hardcoded credentials/API keys in source
-#   4. Container Image Scan (Trivy) — OS/package vulnerabilities in the built image
+#   1. SAST (Semgrep) - static code analysis for vulnerability patterns
+#   2. Dependency Scan (npm audit) - known CVEs in third-party packages
+#   3. Secrets Scan (Gitleaks) - hardcoded credentials/API keys in source
+#   4. Container Image Scan (Trivy) - OS/package vulnerabilities in the built image
 
 name: DevSecOps Security Pipeline
 
@@ -31,15 +31,13 @@ jobs:
         run: npm install
       - name: Run build
         run: npm run build --if-present
-
-# NOTE: continue-on-error is intentional — Juice Shop's own test suite includes
-# assertions that vulnerabilities (e.g. SQLi) succeed, as part of its built-in
-# challenge framework. These specific tests correctly fail after our security
-# fixes are applied, so this step is allowed to fail without blocking the pipeline.
-
+      # NOTE: continue-on-error is intentional - Juice Shop's own test suite includes
+      # assertions that vulnerabilities (e.g. SQLi) succeed, as part of its built-in
+      # challenge framework. These specific tests correctly fail after our security
+      # fixes are applied, so this step is allowed to fail without blocking the pipeline.
       - name: Run unit tests
-  	run: npm test
-  	continue-on-error: true
+        run: npm test
+        continue-on-error: true
 
   sast-semgrep:
     name: SAST (Semgrep)
