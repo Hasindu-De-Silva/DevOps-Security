@@ -1,4 +1,11 @@
-﻿name: DevSecOps Security Pipeline
+﻿# DevSecOps Security Pipeline — IE3142 Group Assignment
+# Runs 4 security gates on every push/PR to main:
+#   1. SAST (Semgrep) — static code analysis for vulnerability patterns
+#   2. Dependency Scan (npm audit) — known CVEs in third-party packages
+#   3. Secrets Scan (Gitleaks) — hardcoded credentials/API keys in source
+#   4. Container Image Scan (Trivy) — OS/package vulnerabilities in the built image
+
+name: DevSecOps Security Pipeline
 
 on:
   push:
